@@ -13,20 +13,21 @@ const url = 'https://restcountries.com/v3.1/all';
 fetch(url)
     .then((resp) => resp.json())
     .then(function(data) {
-        const independentCountries = data.filter(country => country.independent === true);
-        const nonIndependentCountries = data.filter(country => country.independent === false);
+        //pour filtrer 
+        const paysIndependent = data.filter(nations => nations.independent === true);
+        const paysNonIndependent = data.filter(nations => nations.independent === false);
         // fonctions des pays independats
         
-        independentCountries.forEach(function(country) {
+        paysIndependent.forEach(function(nations) {
             let li = createNode('li');
-            li.innerHTML = country.name.common;
+            li.innerHTML = nations.name.common;
             append(independentUl, li);
         });
 
         //fonctios pays dependant
-        nonIndependentCountries.forEach(function(country) {
+        paysNonIndependent.forEach(function(nations) {
             let li = createNode('li');
-            li.innerHTML = country.name.common;
+            li.innerHTML = nations.name.common;
             append(nonIndependentUl, li);
         });
     })
