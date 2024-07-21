@@ -1,27 +1,30 @@
 *{
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+h2.text-bold {
+    font-weight: bold;
 }
 
-body{
-    background-color:rgb(236, 236, 232);
-}
-h2{
-    text-align: center;
-
-}
-.row{
-    text-align: center;
-    font-weight:500px;
-}
 .card {
-    height: 20px; 
-
+    border: 1px solid #ddd; 
 }
+
 .card-img-top {
-    height: 120px; 
+    height: 150px; 
     object-fit: cover;
 }
+
 .card-body {
-    overflow: hidden;
+    padding: 1rem;
+}
+
+.shadow {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.details-card {
+    max-width: 600px;
+    margin: auto; 
 }
