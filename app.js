@@ -54,18 +54,25 @@ fetch(url)
             ajouter(col, carte);
             ajouter(divPaysNonIndependants, col);
         });
+        //  Vérifier si un pays est déjà sélectionné
+        const paysSelectionne = localStorage.getItem('paysSelectionne');
+        if (paysSelectionne){
+            afficherDetails(paysSelectionne);
+        }
     })
     .catch(function(error) {
         console.log(error);
     });
 
-// Fonction pour afficher les détails d'un pays ak api bi
+ // Fonction pour afficher les détails d'un pays ak api bi
 function afficherDetails(cca3) {
     fetch('https://restcountries.com/v3.1/all')
         .then((response) => response.json())
         .then(function(data) {
             const pays = data.find(p => p.cca3 === cca3);
             if (pays) {
+                  // Enregistrer l'identifiant du pays sélectionné dans le localStorage
+                  localStorage.setItem('paysSelectionne', cca3);
                 // Pour masquer les titres et les listes de pays
                 document.getElementById('titreIndependants').style.display = 'none';
                 document.getElementById('titreNonIndependants').style.display = 'none';
@@ -90,21 +97,24 @@ function afficherDetails(cca3) {
                 document.getElementById('conteneurDetails').innerHTML = 'Détails non disponibles';
             }
         })
+          
         .catch(function(error) {
             console.log(error);
         });
 }
 
-// Ma fonction pour revenir genre faire revenir liste des pays
-function retour() {
+// Ma fonction pour revenir genre faire revenir liste des pays ci boo beusee butoon retour
+function retour(){
+    localStorage.removeItem('paysSelectionne'); // Effacer l'identifiant du pays sélectionné du localStorage
+
     document.getElementById('titreIndependants').style.display = 'block';
     document.getElementById('titreNonIndependants').style.display = 'block';
     document.getElementById('divPaysIndependants').style.display = 'flex'; // d-flex pour maintenir l'alignement horizontal
     document.getElementById('divPaysNonIndependants').style.display = 'flex'; // d-flex pour maintenir l'alignement horizontal
     document.getElementById('detailsPays').style.display = 'none';
 
-    // Réinitialiser le défilement des listes pour éviter les problèmes d'alignement mais bon tereewul code bi marcher d
-    document.getElementById('divPaysIndependants').scrollTop = 0;
-    document.getElementById('divPaysNonIndependants').scrollTop = 0;
+    // // Réinitialiser le défilement des listes pour éviter les problèmes d'alignement mais bon tereewul code bi marcher d
+    // document.getElementById('divPaysIndependants').scrollTop = 0;
+    // document.getElementById('divPaysNonIndependants').scrollTop = 0;
 }
  
