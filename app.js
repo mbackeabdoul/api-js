@@ -16,7 +16,7 @@ const url = 'https://restcountries.com/v3.1/all';
 // Charger les données des pays
 fetch(url)
     .then((response) => response.json())
-    .then(function(data) {
+    .then(function(data){
         // Filtrer les pays indépendants ak ls non indépendants
         const paysIndependants = data.filter(pays => pays.independent === true);
         const paysNonIndependants = data.filter(pays => pays.independent === false);
@@ -103,6 +103,16 @@ function afficherDetails(cca3) {
         });
 }
 
+// Fonction pour afficher/masquer le loader
+function afficherLoader(afficher) {
+    document.getElementById('loader').style.display = afficher ? 'block' : 'none';
+    afficherLoader(true); // Afficher le loader
+    afficherLoader(false); // Masquer le loader
+    
+}
+
+
+
 // Ma fonction pour revenir genre faire revenir liste des pays ci boo beusee butoon retour
 function retour(){
     localStorage.removeItem('paysSelectionne'); // Effacer l'identifiant du pays sélectionné du localStorage
@@ -117,4 +127,4 @@ function retour(){
     // document.getElementById('divPaysIndependants').scrollTop = 0;
     // document.getElementById('divPaysNonIndependants').scrollTop = 0;
 }
- 
+
